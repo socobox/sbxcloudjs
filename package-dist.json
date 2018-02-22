@@ -1,0 +1,25 @@
+{
+    "name": "sbxcorejs",
+    "version": "1.0.0",
+    "description": "SbxCloud core library.",
+    "main": "bundles/sbxcore.umd.min.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/sbxcloud/sbxcorejs.git"
+    },
+    "keywords": [
+        "sbx",
+        "sbxcore",
+        "sbxcloud"
+    ],
+    "author": {
+        "name": "Alexander Taborda Acosta",
+        "email": "alextab93@gmail.com"
+    },
+    "license": "ISC",
+    "typings": "index.d.ts",
+    "peerDependencies": {
+      "sbx-querybuilder": "^1.0.8"
+    }
+}
+  
