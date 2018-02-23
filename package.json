@@ -1,6 +1,6 @@
 {
   "name": "sbxcorejs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "SbxCloud core library.",
   "main": "index.js",
   "scripts": {
