@@ -3,7 +3,7 @@
 Welcome, this repo is a friendly implementation of [sbx-querybuilder](https://github.com/sbxcloud/sbx-querybuilder) library.
 
 ## Initialization
-- - -
+* * *
 
 This library has a class names Find, this class need 3 params to initialize: 
 
@@ -44,7 +44,7 @@ console.log(find.query.compile());
 ```
 
 ## Examples
-- - -
+* * *
 
 ### Function names and how to use it
 
