@@ -4,14 +4,12 @@ export class Find {
   public query;
   public isFind;
   private lastANDOR?: string;
-  public totalpages: number;
   private fecth: string[];
 
   constructor(model: string, isFind: boolean, domain: number) {
     this.query = new QueryBuilder().setDomain(domain).setModel(model);
     this.isFind = isFind;
     this.lastANDOR = null;
-    this.totalpages = 1;
   }
 
   public newGroupWithAnd() {
