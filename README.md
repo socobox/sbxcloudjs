@@ -1,5 +1,7 @@
 # sbxcorejs
 
+[![SBX](https://sbxcloud.com/www/api/base/powered-sbx__black.png)](https://sbxcloud.com)
+
 Welcome, this repo is a friendly implementation of [sbx-querybuilder](https://github.com/sbxcloud/sbx-querybuilder) library.
 
 ## Initialization
