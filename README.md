@@ -136,4 +136,4 @@ find.query.compile();
 
 ### Note:
 
-The find.query.compile() returns the body of the POST request to [sbxcloud](https://sbxcloud.com)
+The find.query.compile() returns the body of the POST request to [sbxcloud](https://sbxcloud.com).
