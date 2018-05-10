@@ -7,7 +7,7 @@ Welcome, this repo is a friendly implementation of [sbx-querybuilder](https://gi
 ## Initialization
 * * *
 
-This library has a class names Find, this class need 3 params to initialize: 
+This library has a class names Find, this class need 2 params to initialize: 
 
 | Name | Type | Description |
 | ------ | ------ | ------ |
