@@ -2,13 +2,10 @@ import QueryBuilder from 'sbx-querybuilder/index';
 
 export class Find {
   public query;
-  public isFind;
   private lastANDOR?: string;
-  private fecth: string[];
 
-  constructor(model: string, isFind: boolean, domain: number) {
+  constructor(model: string, domain: number) {
     this.query = new QueryBuilder().setDomain(domain).setModel(model);
-    this.isFind = isFind;
     this.lastANDOR = null;
   }
 
@@ -344,15 +341,12 @@ export class Find {
    * @return {Find}
    */
   public orderBy(field: string, asc: Boolean= false) {
-    this.query.orderBy(  field, asc);
+    this.query.orderBy(field, asc);
     return this;
   }
 
   public fetchModels(array: string[]) {
-    if (this.isFind) {
-      this.query.fetchModels(array);
-      this.fecth = array;
-    }
+    this.query.fetchModels(array);
     return this;
   }
 

@@ -1,6 +1,6 @@
 {
     "name": "sbxcorejs",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "SbxCloud core library.",
     "main": "bundles/sbxcore.umd.min.js",
     "repository": {

@@ -12,7 +12,6 @@ This library has a class names Find, this class need 3 params to initialize:
 | Name | Type | Description |
 | ------ | ------ | ------ |
 | model | String | Model name of sbx model. |
-| isFind | Boolean | true for find and false for delete |
 | domain | Integer | domain id |
 
 ### Note:
@@ -33,7 +32,7 @@ const Find = require("sbxcorejs").Find;
 // Javascript:
 import { Find } from 'sbxcorejs';
 
-const find = new Find('audit', true, 96);
+const find = new Find('audit', 96);
 
 // Pagination 
 find.setPage(2); // default: 1
@@ -86,7 +85,7 @@ With Integer, Float, Date we can use:
 
 ```
 const Find = require("sbxcorejs").Find;
-const find = new Find('audit', true, 96);
+const find = new Find('audit', 96);
 
 find.andWhereIsEqual('action', 'DEL')
     .orWhereIsEqual('action', 'GI')
@@ -104,7 +103,7 @@ find.query.compile();
 
 ```
 const Find = require("sbxcorejs").Find;
-const find = new Find('audit', true, 96);
+const find = new Find('audit', 96);
 
 find.andWhereStartsWith('action', 'DEL')
     .orWhereStartsWith('action', 'GI')
@@ -122,7 +121,7 @@ find.query.compile();
 
 ```
 const Find = require("sbxcorejs").Find;
-const find = new Find('audit', true, 96);
+const find = new Find('audit', 96);
 
 find.andWhereGreaterThan('consecutive', 1)
     .orWhereGreaterThan('consecutive', 1)
