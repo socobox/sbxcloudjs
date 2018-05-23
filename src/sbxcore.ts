@@ -34,7 +34,7 @@ export class SbxCore{
     }
 
 
-    private encodeEmails(email: string) {
+    protected encodeEmails(email: string) {
         const spl = email.split('@');
         if (spl.length > 1) {
             email = encodeURIComponent(spl[0]) + '@' + spl[1];
@@ -42,12 +42,12 @@ export class SbxCore{
         return email;
     }
 
-    private validateLogin(login: string): boolean {
+    protected validateLogin(login: string): boolean {
         const rlogin   =  /^(\w?\.?\-?)+$/;
         return rlogin.test(login);
     }
 
-    private validateEmail(email: string): boolean {
+    protected validateEmail(email: string): boolean {
         const rlogin  =  /^(\w?\.?\-?\+?)+@(\w?\.?\-?)+$/;
         return rlogin.test(email);
     }
@@ -56,7 +56,7 @@ export class SbxCore{
      * UTILS
      */
 
-    private queryBuilderToInsert(data, letNull?: Boolean): any {
+    protected queryBuilderToInsert(data, letNull?: Boolean): any {
         const query =   new QueryBuilder()
             .setDomain(SbxCore.environment.domain);
         if (Array.isArray(data) ) {
