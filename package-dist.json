@@ -1,6 +1,6 @@
 {
     "name": "sbxcorejs",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "description": "SbxCloud core library.",
     "main": "bundles/sbxcore.umd.min.js",
     "repository": {
@@ -16,6 +16,12 @@
         "name": "Alexander Taborda Acosta",
         "email": "alextab93@gmail.com"
     },
+    "contributors": [
+        {
+            "name": "Luis Guzman",
+            "email": "lgguzman890414@gmail.com"
+        }
+    ],
     "license": "ISC",
     "typings": "index.d.ts",
     "peerDependencies": {
