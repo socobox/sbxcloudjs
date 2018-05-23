@@ -1,5 +1,114 @@
 import QueryBuilder from 'sbx-querybuilder/index';
 
+export class SbxCore{
+
+    constructor(){
+
+    }
+    public static environment = { } as any;
+    public urls: any = {
+        update_password: '/user/v1/password',
+        login: '/user/v1/login',
+        register: '/user/v1/register',
+        validate: '/user/v1/validate',
+        row: '/data/v1/row',
+        find: '/data/v1/row/find',
+        update: '/data/v1/row/update',
+        delete: '/data/v1/row/delete',
+        downloadFile: '/content/v1/download',
+        uploadFile: '/content/v1/upload',
+        addFolder: '/content/v1/folder',
+        folderList: '/content/v1/folder',
+        send_mail: '/email/v1/send',
+        payment_customer: '/payment/v1/customer',
+        payment_card: '/payment/v1/card',
+        payment_token: '/payment/v1/token',
+        password: '/user/v1/password/request',
+        cloudscript_run: '/cloudscript/v1/run'
+    };
+
+    public initialize(domain: number, appKey: string, baseUrl: string = 'https://sbxcloud.com/api') {
+        SbxCore.environment.domain = domain;
+        SbxCore.environment.baseUrl = baseUrl;
+        SbxCore.environment.appKey = appKey;
+    }
+
+
+    private encodeEmails(email: string) {
+        const spl = email.split('@');
+        if (spl.length > 1) {
+            email = encodeURIComponent(spl[0]) + '@' + spl[1];
+        }
+        return email;
+    }
+
+    private validateLogin(login: string): boolean {
+        const rlogin   =  /^(\w?\.?\-?)+$/;
+        return rlogin.test(login);
+    }
+
+    private validateEmail(email: string): boolean {
+        const rlogin  =  /^(\w?\.?\-?\+?)+@(\w?\.?\-?)+$/;
+        return rlogin.test(email);
+    }
+
+    /**
+     * UTILS
+     */
+
+    private queryBuilderToInsert(data, letNull?: Boolean): any {
+        const query =   new QueryBuilder()
+            .setDomain(SbxCore.environment.domain);
+        if (Array.isArray(data) ) {
+            data.forEach(item => {
+                query.addObject(this.validateData(item, letNull));
+            });
+        }else {
+            query.addObject(this.validateData(data, letNull));
+        }
+        return query;
+    }
+
+    public validateData(data: any, letNull?: Boolean): any {
+        const temp = {};
+        Object.keys(data)
+            .filter(key => {
+                const v = data[key];
+                return (((Array.isArray(v) || typeof v === 'string') ?
+                    (v.length > 0) :
+                    (v !== null && v !== undefined)) || letNull);
+            }).forEach(key => {
+            if ( (data[key] !== null && data[key] !== undefined)  && data[key]._KEY != null) {
+                data[key] = data[key]._KEY;
+            }
+            const key2 = (key !== '_KEY') ? key.replace(/^_/, '') : key;
+            temp[key2] = data[key];
+        });
+        return temp;
+    }
+
+    public validateKeys(data: any): any {
+        const temp = [];
+        if (Array.isArray(data) ) {
+            data.forEach(key => {
+                if (typeof key === 'string') {
+                    temp.push(key);
+                }else {
+                    temp.push(key._KEY);
+                }
+            });
+        }else {
+            if (typeof data === 'string') {
+                temp.push(data);
+            }else {
+                temp.push(data._KEY);
+            }
+        }
+        return temp;
+    }
+
+}
+
 export class Find {
   public query;
   private lastANDOR?: string;
@@ -378,6 +487,23 @@ export class Find {
       }
     }
     return temp;
+  }
+
+
+  public mapReverseFetchesResult(response: any, parentName: string, arrayName: string, completefetch?: string[]  ){
+    if(parentName.indexOf(".")>=0) throw Error("Only one level is allowed");
+      completefetch = completefetch || [parentName];
+      const newResponse = this.mapFetchesResult(response, completefetch);
+      const objTemp = newResponse.results.reduce( function( objects, item ){
+              objects[item[parentName]._KEY] =   objects[item[parentName]._KEY] || item[parentName];
+              objects[item[parentName]._KEY][arrayName] =  objects[item[parentName]._KEY][arrayName] || [];
+              item[parentName]=item[parentName]._KEY;
+              objects[item[parentName]._KEY][arrayName].push(item)
+          }
+          ,{});
+      newResponse.results = Object.keys(objTemp).map( k => objTemp(k));
+      return newResponse;
+
   }
   
   /**
