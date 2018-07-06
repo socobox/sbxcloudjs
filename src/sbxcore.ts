@@ -642,7 +642,7 @@ export class FilterJoin {
    * @return {Find}
    * @constructor
    */
-  public FilterWhereGreaterThan() {
+  public FilterWhereGreaterThan(value: any) {
     this.find.query.setReferenceJoin('>', this.field, this.referenceField, this.referenceModel, value);
     return this.find;
   }
