@@ -57,7 +57,7 @@ export class SbxCore{
      */
 
     protected queryBuilderToInsert(data, letNull?: Boolean): any {
-        const query =   new QueryBuilder()
+        const query = new QueryBuilder()
             .setDomain(SbxCore.environment.domain);
         if (Array.isArray(data) ) {
             data.forEach(item => {
@@ -611,7 +611,7 @@ export class FilterJoin {
    * @param value
    * @return {Find}
    */
-  public filterWhereIsEqual(field: string, value: any) {
+  public filterWhereIsEqual(value: any) {
     this.find.query.setReferenceJoin('=', this.field, this.referenceField, this.referenceModel, value);
     return this.find;
   }
@@ -621,7 +621,7 @@ export class FilterJoin {
    * @return {Find}
    * @constructor
    */
-  public FilterWhereIsNotNull(field: string) {
+  public FilterWhereIsNotNull() {
     this.find.query.setReferenceJoin('IS NOT', this.field, this.referenceField, this.referenceModel, null);
     return this.find;
   }
@@ -631,7 +631,7 @@ export class FilterJoin {
    * @return {Find}
    * @constructor
    */
-  public FilterWhereIsNull(field: string) {
+  public FilterWhereIsNull() {
     this.find.query.setReferenceJoin('IS', this.field, this.referenceField, this.referenceModel, null);
     return this.find;
   }
@@ -642,7 +642,7 @@ export class FilterJoin {
    * @return {Find}
    * @constructor
    */
-  public FilterWhereGreaterThan(field: string, value: any) {
+  public FilterWhereGreaterThan() {
     this.find.query.setReferenceJoin('>', this.field, this.referenceField, this.referenceModel, value);
     return this.find;
   }
@@ -653,7 +653,7 @@ export class FilterJoin {
    * @return {Find}
    * @constructor
    */
-  public FilterWhereLessThan(field: string, value: any) {
+  public FilterWhereLessThan(value: any) {
     this.find.query.setReferenceJoin('<', this.field, this.referenceField, this.referenceModel, value);
     return this.find;
   }
@@ -664,7 +664,7 @@ export class FilterJoin {
    * @return {Find}
    * @constructor
    */
-  public FilterWhereGreaterOrEqualThan(field: string, value: any) {
+  public FilterWhereGreaterOrEqualThan(value: any) {
     this.find.query.setReferenceJoin('>=', this.field, this.referenceField, this.referenceModel, value);
     return this.find;
   }
@@ -675,7 +675,7 @@ export class FilterJoin {
    * @return {Find}
    * @constructor
    */
-  public FilterWhereLessOrEqualThan(field: string, value: any) {
+  public FilterWhereLessOrEqualThan(value: any) {
     this.find.query.setReferenceJoin('<=', this.field, this.referenceField, this.referenceModel, value);
     return this.find;
   }
@@ -686,7 +686,7 @@ export class FilterJoin {
    * @return {Find}
    * @constructor
    */
-  public FilterWhereIsNotEqual(field: string, value: any) {
+  public FilterWhereIsNotEqual(value: any) {
     this.find.query.setReferenceJoin('!=', this.field, this.referenceField, this.referenceModel, value);
     return this.find;
   }
@@ -697,7 +697,7 @@ export class FilterJoin {
    * @return {Find}
    * @constructor
    */
-  public FilterWhereLike(field: string, value: any) {
+  public FilterWhereLike(value: any) {
     this.find.query.setReferenceJoin('LIKE', this.field, this.referenceField, this.referenceModel, value);
     return this.find;
   }
@@ -708,7 +708,7 @@ export class FilterJoin {
    * @return {Find}
    * @constructor
    */
-  public FilterWhereIn(field: string, value: any) {
+  public FilterWhereIn(value: any) {
     this.find.query.setReferenceJoin('IN', this.field, this.referenceField, this.referenceModel, value);
     return this.find;
   }
@@ -719,7 +719,7 @@ export class FilterJoin {
    * @return {Find}
    * @constructor
    */
-  public FilterWhereNotIn(field: string, value: any) {
+  public FilterWhereNotIn(value: any) {
     this.find.query.setReferenceJoin('NOT IN', this.field, this.referenceField, this.referenceModel, value);
     return this.find;
   }
