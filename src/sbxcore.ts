@@ -58,7 +58,7 @@ export class SbxCore{
     return rlogin.test(email);
   }
 
-  /**
+  /*
    * UTILS
    */
 
@@ -203,13 +203,25 @@ export class Find {
     this.lastANDOR = null;
     return this;
   }
+  
+  public andWhere(field: string, value: any, operator: string) {
+    this.lastANDOR = 'AND';
+    this.query.addCondition(this.lastANDOR, field, operator, value);
+    return this;
+  }
+  
+  public orWhere(field: string, value: any, operator: string) {
+    this.lastANDOR = (this.lastANDOR == null) ? 'AND' : 'OR';
+    this.query.addCondition(this.lastANDOR, field, operator, value);
+    return this;
+  }
 
   /**
    * @param {string} field
    * @param value
    * @return {Find}
    */
-  public andWhereIsEqual(field: string, value: any) {
+  public andWhereIsEqualTo(field: string, value: any) {
     this.lastANDOR =  'AND';
     this.query.addCondition(this.lastANDOR, field, '=', value);
     return this;
@@ -241,7 +253,7 @@ export class Find {
    * @param value
    * @return {Find}
    */
-  public andWhereGreaterThan(field: string, value: any) {
+  public andWhereIsGreaterThan(field: string, value: any) {
     this.lastANDOR = 'AND';
     this.query.addCondition(this.lastANDOR, field, '>', value);
     return this;
@@ -252,7 +264,7 @@ export class Find {
    * @param value
    * @return {Find}
    */
-  public andWhereLessThan(field: string, value: any) {
+  public andWhereIsLessThan(field: string, value: any) {
     this.lastANDOR = 'AND';
     this.query.addCondition(this.lastANDOR, field, '<', value);
     return this;
@@ -263,7 +275,7 @@ export class Find {
    * @param value
    * @return {Find}
    */
-  public andWhereGreaterOrEqualThan(field: string, value: any) {
+  public andWhereIsGreaterOrEqualTo(field: string, value: any) {
     this.lastANDOR = 'AND';
     this.query.addCondition(this.lastANDOR, field, '>=', value);
     return this;
@@ -274,7 +286,7 @@ export class Find {
    * @param value
    * @return {Find}
    */
-  public andWhereLessOrEqualThan(field: string, value: any) {
+  public andWhereIsLessOrEqualTo(field: string, value: any) {
     this.lastANDOR = 'AND';
     this.query.addCondition(this.lastANDOR, field, '<=', value);
     return this;
@@ -285,7 +297,7 @@ export class Find {
    * @param value
    * @return {Find}
    */
-  public andWhereIsNotEqual(field: string, value: any) {
+  public andWhereIsNotEqualTo(field: string, value: any) {
     this.lastANDOR = 'AND';
     this.query.addCondition(this.lastANDOR, field, '!=', value);
     return this;
@@ -296,7 +308,7 @@ export class Find {
    * @param value
    * @return {Find}
    */
-  public andWhereStartsWith(field: string, value: string) {
+  public andWhereItStartsWith(field: string, value: string) {
     this.lastANDOR = 'AND';
     value = value && value.length > 0 ? `%${value}` : value;
     this.query.addCondition(this.lastANDOR, field, 'LIKE', value);
@@ -309,7 +321,7 @@ export class Find {
    * @param value
    * @return {Find}
    */
-  public andWhereEndsWith(field: string, value: string) {
+  public andWhereItEndsWith(field: string, value: string) {
     this.lastANDOR = 'AND';
     value = value && value.length > 0 ? `${value}%` : value;
     this.query.addCondition(this.lastANDOR, field, 'LIKE', value);
@@ -321,7 +333,7 @@ export class Find {
    * @param value
    * @return {Find}
    */
-  public andWhereContains(field: string, value: string) {
+  public andWhereItContains(field: string, value: string) {
     this.lastANDOR = 'AND';
     value = value && value.length > 0 ? `%${value.split(' ').join('%')}%` : value;
     this.query.addCondition(this.lastANDOR, field, 'LIKE', value);
@@ -333,7 +345,7 @@ export class Find {
    * @param value
    * @return {Find}
    */
-  public andWhereIn(field: string, value: any) {
+  public andWhereIsIn(field: string, value: any) {
     this.lastANDOR = 'AND';
     this.query.addCondition(this.lastANDOR, field, 'IN', value);
     return this;
@@ -344,7 +356,7 @@ export class Find {
    * @param value
    * @return {Find}
    */
-  public andWhereNotIn(field: string, value: any) {
+  public andWhereIsNotIn(field: string, value: any) {
     this.lastANDOR = 'AND';
     this.query.addCondition(this.lastANDOR, field, 'NOT IN', value);
     return this;
@@ -355,7 +367,7 @@ export class Find {
    * @param value
    * @return {Find}
    */
-  public orWhereIsEqual(field: string, value: any) {
+  public orWhereIsEqualTo(field: string, value: any) {
     this.lastANDOR = (this.lastANDOR == null) ? 'AND' : 'OR';
     this.query.addCondition(this.lastANDOR, field, '=', value);
     return this;
@@ -386,7 +398,7 @@ export class Find {
    * @param value
    * @return {Find}
    */
-  public orWhereGreaterThan(field: string, value: any) {
+  public orWhereIsGreaterThan(field: string, value: any) {
     this.lastANDOR = (this.lastANDOR == null) ? 'AND' : 'OR';
     this.query.addCondition(this.lastANDOR, field, '>', value);
     return this;
@@ -397,7 +409,7 @@ export class Find {
    * @param value
    * @return {Find}
    */
-  public orWhereLessThan(field: string, value: any) {
+  public orWhereIsLessThan(field: string, value: any) {
     this.lastANDOR = (this.lastANDOR == null) ? 'AND' : 'OR';
     this.query.addCondition(this.lastANDOR, field, '<', value);
     return this;
@@ -408,7 +420,7 @@ export class Find {
    * @param value
    * @return {Find}
    */
-  public orWhereGreaterOrEqualThan(field: string, value: any) {
+  public orWhereIsGreaterOrEqualTo(field: string, value: any) {
     this.lastANDOR = (this.lastANDOR == null) ? 'AND' : 'OR';
     this.query.addCondition(this.lastANDOR, field, '>=', value);
     return this;
@@ -419,7 +431,7 @@ export class Find {
    * @param value
    * @return {Find}
    */
-  public orWhereLessOrEqualThan(field: string, value: any) {
+  public orWhereIsLessOrEqualTo(field: string, value: any) {
     this.lastANDOR = (this.lastANDOR == null) ? 'AND' : 'OR';
     this.query.addCondition(this.lastANDOR, field, '<=', value);
     return this;
@@ -430,7 +442,7 @@ export class Find {
    * @param value
    * @return {Find}
    */
-  public orWhereIsNotEqual(field: string, value: any) {
+  public orWhereIsNotEqualTo(field: string, value: any) {
     this.lastANDOR = (this.lastANDOR == null) ? 'AND' : 'OR';
     this.query.addCondition(this.lastANDOR, field, '!=', value);
     return this;
@@ -441,7 +453,7 @@ export class Find {
    * @param value
    * @return {Find}
    */
-  public orWhereStartsWith(field: string, value: string) {
+  public orWhereItStartsWith(field: string, value: string) {
     this.lastANDOR = (this.lastANDOR == null) ? 'AND' : 'OR';
     value = value && value.length > 0 ? `%${value}` : value;
     this.query.addCondition(this.lastANDOR, field, 'LIKE', value);
@@ -453,7 +465,7 @@ export class Find {
    * @param value
    * @return {Find}
    */
-  public orWhereEndsWith(field: string, value: string) {
+  public orWhereItEndsWith(field: string, value: string) {
     this.lastANDOR = (this.lastANDOR == null) ? 'AND' : 'OR';
     value = value && value.length > 0 ? `${value}%` : value;
     this.query.addCondition(this.lastANDOR, field, 'LIKE', value);
@@ -465,7 +477,7 @@ export class Find {
    * @param value
    * @return {Find}
    */
-  public orWhereContains(field: string, value: string) {
+  public orWhereItContains(field: string, value: string) {
     this.lastANDOR = (this.lastANDOR == null) ? 'AND' : 'OR';
     // if the user sends null or empty, there will be no wildcar placed.
     value = value && value.length > 0 ? `%${value.split(' ').join('%')}%` : value;
@@ -478,7 +490,7 @@ export class Find {
    * @param value
    * @return {Find}
    */
-  public orWhereIn(field: string, value: any) {
+  public orWhereIsIn(field: string, value: any) {
     this.lastANDOR = (this.lastANDOR == null) ? 'AND' : 'OR';
     this.query.addCondition(this.lastANDOR, field, 'IN', value);
     return this;
@@ -489,7 +501,7 @@ export class Find {
    * @param value
    * @return {Find}
    */
-  public orWhereNotIn(field: string, value: any) {
+  public orWhereIsNotIn(field: string, value: any) {
     this.lastANDOR = (this.lastANDOR == null) ? 'AND' : 'OR';
     this.query.addCondition(this.lastANDOR, field, 'NOT IN', value);
     return this;
@@ -500,7 +512,7 @@ export class Find {
    * @param {string} field column name of principal model
    * @param {string} referenceField column name of subQuery
    */
-  public orWhereReferenceJoinBetween(field: string, referenceField: string) {
+  public orJoinBetween(field: string, referenceField: string) {
     return new ReferenceJoin(this, field, referenceField, 'OR');
   }
 
@@ -509,22 +521,12 @@ export class Find {
    * @param {string} field column name of principal model
    * @param {string} referenceField column name of subQuery
    */
-  public andWhereReferenceJoinBetween(field: string, referenceField: string) {
+  public andJoinBetween(field: string, referenceField: string) {
     return new ReferenceJoin(this, field, referenceField, 'AND');
   }
 
   public whereWithKeys(keys) {
     this.query.whereWithKeys(this.validateKeys(keys));
-    return this;
-  }
-
-  /**
-   * @param {string} field
-   * @param asc
-   * @return {Find}
-   */
-  public orderBy(field: string, asc: Boolean= false) {
-    this.query.orderBy(field, asc);
     return this;
   }
 
@@ -599,7 +601,6 @@ export class FilterJoin {
   private referenceField: string;
   private referenceModel: string;
 
-
   constructor(find: Find, field: string, referenceField: string, referenceModel: string) {
     this.find = find;
     this.field = field;
@@ -612,7 +613,7 @@ export class FilterJoin {
    * @param value
    * @return {Find}
    */
-  public filterWhereIsEqual(value: any) {
+  public whereIsEqualTo(value: any) {
     this.find.query.setReferenceJoin('=', this.field, this.referenceField, this.referenceModel, value);
     return this.find;
   }
@@ -622,7 +623,7 @@ export class FilterJoin {
    * @return {Find}
    * @constructor
    */
-  public FilterWhereIsNotNull() {
+  public whereIsNotNull() {
     this.find.query.setReferenceJoin('IS NOT', this.field, this.referenceField, this.referenceModel, null);
     return this.find;
   }
@@ -632,7 +633,7 @@ export class FilterJoin {
    * @return {Find}
    * @constructor
    */
-  public FilterWhereIsNull() {
+  public whereIsNull() {
     this.find.query.setReferenceJoin('IS', this.field, this.referenceField, this.referenceModel, null);
     return this.find;
   }
@@ -643,7 +644,7 @@ export class FilterJoin {
    * @return {Find}
    * @constructor
    */
-  public FilterWhereGreaterThan(value: any) {
+  public whereIsGreaterThan(value: any) {
     this.find.query.setReferenceJoin('>', this.field, this.referenceField, this.referenceModel, value);
     return this.find;
   }
@@ -654,7 +655,7 @@ export class FilterJoin {
    * @return {Find}
    * @constructor
    */
-  public FilterWhereLessThan(value: any) {
+  public filterWhereIsLessThan(value: any) {
     this.find.query.setReferenceJoin('<', this.field, this.referenceField, this.referenceModel, value);
     return this.find;
   }
@@ -665,7 +666,7 @@ export class FilterJoin {
    * @return {Find}
    * @constructor
    */
-  public FilterWhereGreaterOrEqualThan(value: any) {
+  public whereIsGreaterOrEqualTo(value: any) {
     this.find.query.setReferenceJoin('>=', this.field, this.referenceField, this.referenceModel, value);
     return this.find;
   }
@@ -676,7 +677,7 @@ export class FilterJoin {
    * @return {Find}
    * @constructor
    */
-  public FilterWhereLessOrEqualThan(value: any) {
+  public whereIsLessOrEqualTo(value: any) {
     this.find.query.setReferenceJoin('<=', this.field, this.referenceField, this.referenceModel, value);
     return this.find;
   }
@@ -687,7 +688,7 @@ export class FilterJoin {
    * @return {Find}
    * @constructor
    */
-  public FilterWhereIsNotEqual(value: any) {
+  public whereIsNotEqual(value: any) {
     this.find.query.setReferenceJoin('!=', this.field, this.referenceField, this.referenceModel, value);
     return this.find;
   }
@@ -698,7 +699,7 @@ export class FilterJoin {
    * @return {Find}
    * @constructor
    */
-  public FilterWhereLike(value: any) {
+  public whereIsLike(value: any) {
     this.find.query.setReferenceJoin('LIKE', this.field, this.referenceField, this.referenceModel, value);
     return this.find;
   }
@@ -709,19 +710,19 @@ export class FilterJoin {
    * @return {Find}
    * @constructor
    */
-  public FilterWhereIn(value: any) {
+  public whereIsIn(value: any) {
     this.find.query.setReferenceJoin('IN', this.field, this.referenceField, this.referenceModel, value);
     return this.find;
   }
 
   /**
-   * @param {string} field
+   * @param { string } field
    * @param value
-   * @return {Find}
+   * @return { Find }
    * @constructor
    */
-  public FilterWhereNotIn(value: any) {
+  public whereIsNotIn(value: any) {
     this.find.query.setReferenceJoin('NOT IN', this.field, this.referenceField, this.referenceModel, value);
     return this.find;
   }
-}  
+}
