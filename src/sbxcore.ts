@@ -577,9 +577,9 @@ export class ReferenceJoin {
     this.field = field;
     this.referenceField = referenceField;
     if (type === 'AND') {
-      this.find.andWhereIn(this.field, '@reference_join@');
+      this.find.andWhereIsIn(this.field, '@reference_join@');
     } else {
-      this.find.orWhereIn(this.field, '@reference_join@');
+      this.find.orWhereIsIn(this.field, '@reference_join@');
     }
   }
 
