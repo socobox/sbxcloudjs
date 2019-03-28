@@ -121,6 +121,7 @@ export class SbxCore{
       objects[item[parentName]._KEY][arrayName] = objects[item[parentName]._KEY][arrayName] || [];
       item[parentName]=item[parentName]._KEY;
       objects[item[parentName]][arrayName].push(item);
+      return objects;
     }, {});
     newResponse.results = Object.keys(objTemp).map( k => objTemp[k]);
     return newResponse;
