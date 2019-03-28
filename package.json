@@ -1,6 +1,6 @@
 {
   "name": "sbxcorejs",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "SbxCloud core library.",
   "main": "index.js",
   "scripts": {
@@ -25,11 +25,11 @@
     "email": "alextab93@gmail.com"
   },
   "contributors": [
-        {
-            "name": "Luis Guzman",
-            "email": "lgguzman890414@gmail.com"
-        }
-    ],
+    {
+      "name": "Luis Guzman",
+      "email": "lgguzman890414@gmail.com"
+    }
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/sbxcloud/sbxcorejs/issues"

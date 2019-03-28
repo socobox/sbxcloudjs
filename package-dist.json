@@ -1,6 +1,6 @@
 {
     "name": "sbxcorejs",
-    "version": "1.4.1",
+    "version": "1.4.2",
     "description": "SbxCloud core library.",
     "main": "bundles/sbxcore.umd.min.js",
     "repository": {
@@ -28,4 +28,3 @@
       "sbx-querybuilder": "^1.0.8"
     }
 }
-  
