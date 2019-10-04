@@ -4,7 +4,7 @@
   "description": "SbxCloud core library.",
   "main": "index.js",
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf dist/*",
     "transpile": "tsc",
     "package": "rollup -c",
     "minify": "./node_modules/uglify-js/bin/uglifyjs dist/bundles/sbxcore.umd.js --screw-ie8 --compress --mangle --comments --output dist/bundles/sbxcore.umd.min.js",
