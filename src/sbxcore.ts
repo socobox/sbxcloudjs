@@ -3,7 +3,7 @@ import QueryBuilder from 'sbx-querybuilder/index';
 export class SbxCore{
 
   constructor(){ }
-  
+
   public static environment = { } as any;
   public urls: any = {
     update_password: '/user/v1/password',
@@ -23,7 +23,9 @@ export class SbxCore{
     payment_card: '/payment/v1/card',
     payment_token: '/payment/v1/token',
     password: '/user/v1/password/request',
-    cloudscript_run: '/cloudscript/v1/run'
+    cloudscript_run: '/cloudscript/v1/run',
+    appList: '/domain/v1/app/list',
+    appConfig: '/domain/v1/app/config'
   };
 
   public initialize(domain: number, appKey: string, baseUrl: string = 'https://sbxcloud.com/api') {
@@ -35,11 +37,11 @@ export class SbxCore{
   protected with(model: string) {
     return new Find(model, SbxCore.environment.domain);
   }
-  
+
   protected upsert(model: string, data: any, letNull?: Boolean) {
     return this.queryBuilderToInsert(data, letNull).setModel(model).compile();
   }
-  
+
   protected encodeEmails(email: string) {
     const spl = email.split('@');
     if (spl.length > 1) {
@@ -111,7 +113,7 @@ export class SbxCore{
     }
     return temp;
   }
-  
+
   public mapReverseFetchesResult(response: any, parentName: string, arrayName: string, completefetch?: string[]  ){
     if(parentName.indexOf(".")>=0) throw Error("Only one level is allowed");
     completefetch = completefetch || [parentName];
@@ -126,7 +128,7 @@ export class SbxCore{
     newResponse.results = Object.keys(objTemp).map( k => objTemp[k]);
     return newResponse;
   }
-  
+
   /**
    * @param response the response of the server
    * @param {string[]} completefetch the array of fetch
@@ -188,7 +190,7 @@ export class Find {
     this.query = new QueryBuilder().setDomain(domain).setModel(model);
     this.lastANDOR = null;
   }
-  
+
   public compile() {
     return this.query.compile();
   }
@@ -204,13 +206,13 @@ export class Find {
     this.lastANDOR = null;
     return this;
   }
-  
+
   public andWhere(field: string, value: any, operator: string) {
     this.lastANDOR = 'AND';
     this.query.addCondition(this.lastANDOR, field, operator, value);
     return this;
   }
-  
+
   public orWhere(field: string, value: any, operator: string) {
     this.lastANDOR = (this.lastANDOR == null) ? 'AND' : 'OR';
     this.query.addCondition(this.lastANDOR, field, operator, value);
@@ -559,7 +561,7 @@ export class Find {
 }
 
 export class ReferenceJoin {
-  
+
   private find: Find;
   private field: string;
   private referenceField: string;
