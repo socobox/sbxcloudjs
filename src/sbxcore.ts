@@ -18,6 +18,8 @@ export class SbxCore{
     uploadFile: '/content/v1/upload',
     addFolder: '/content/v1/folder',
     folderList: '/content/v1/folder',
+    deleteFolder: '/content/v1/delete',
+    renameFolder: '/content/v1/rename',
     send_mail: '/email/v1/send',
     payment_customer: '/payment/v1/customer',
     payment_card: '/payment/v1/card',
