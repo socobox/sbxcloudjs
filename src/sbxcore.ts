@@ -192,14 +192,12 @@ export class Find {
   constructor(model: string, domain: number) {
     this.query = new QueryBuilder().setDomain(domain).setModel(model);
     this.lastANDOR = null;
+    this.model = model;
   }
 
-  public getModel(cb?: (model: string) => void) {
-    if (cb) {
-      cb(this.model);
-      return this;
-    }
-    return this.model;
+  public getModel(cb: (model: string) => void) {
+    cb(this.model);
+    return this;
   }
 
   public compile() {
