@@ -187,10 +187,19 @@ export class SbxCore{
 export class Find {
   public query;
   private lastANDOR?: string;
+  private model: string;
 
   constructor(model: string, domain: number) {
     this.query = new QueryBuilder().setDomain(domain).setModel(model);
     this.lastANDOR = null;
+  }
+
+  public getModel(cb?: (model: string) => void) {
+    if (cb) {
+      cb(this.model);
+      return this;
+    }
+    return this.model;
   }
 
   public compile() {
